@@ -1,45 +1,50 @@
-## Overview
-The Kitchen Simulator is a high-fidelity kitchen management engine designed to simulate the lifecycle of a food order. Unlike a simple
-CRUD application, this module focuses on state management, asynchronous timing, and algorithmic estimation to provide a realistic 
-representation of kitchen operations.
+# Kitchen Simulator
+## Project Description
 
-The goal is to model the transition of an order from the moment a customer places it until it reaches a "Completed" state,
-factoring in real-world constraints like ingredient availability, chef expertise, and multi-step preparation processes.
+The **Kitchen Simulator** is a high-fidelity engine designed to model the complex lifecycle of food service operations. Moving beyond standard CRUD functionality, this project serves as a **Technical Research & Development (R&D) Manifesto**. It is a deliberate "over-engineered" sandbox designed to push the boundaries of distributed systems, high-performance computing, and multi-paradigm data modeling.
 
-## Goals
-The primary goal of this project is not just to simulate a kitchen, but to serve as a high-stress testing ground for advanced software engineering patterns. 
-It is a sandbox designed to push the boundaries of distributed systems, multi-paradigm data modeling, and high-performance computing. Every architectural 
-choice is made to master "The Edge"—the point where standard solutions fail and specialized engineering begins.
+The core mission is to master "The Edge"—the threshold where standard software solutions fail and specialized architectural engineering becomes a necessity.
 
-> **Disclaimer:** This project is intentionally over-engineered.
+## Project Scope
 
-## Conceptual Scope 
-For this initial phase, the project aims to:
+For the initial phase, the simulator focuses on the transition from order placement to completion, factoring in real-world constraints through a high-precision lens:
 
-- **Orchestrate Asynchronous Workflows:** Use non-blocking pauses to simulate real-world time passing during preparation steps.
-- **Implement Dynamic Calculation:** Determine preparation times using a formula that balances chef skill, task difficulty, and base step duration.
-- **Ensure State Integrity:** Maintain a strict state machine (*Order -> Ingredient Check -> In Progress -> Completed*) with a full audit trail (History).
-- **Multi-Language Integration:** Leverage a modern stack where .NET handles business logic, Rust manages high-performance simulations/calculations, and TypeScript provides a reactive interface or API consumption.
+* **Asynchronous Orchestration:** Simulating real-world time passage (e.g., bread toasting) using non-blocking, asynchronous execution threads.
+* **State Integrity:** Implementing a strict state machine (*Order -> Ingredient Check -> In Progress -> Completed*) with full event-sourced traceability.
+* **Dynamic Algorithmic Estimation:** Calculating preparation time through a multi-variable formula.
+* **Inventory Simulation:** Validating stock availability with automated fallback states (e.g., "In Search of Ingredients") to test system resilience.
 
-## Tech Stack
-- .NET 10 (C#)
-- Rust
-- TypeScript
+## Project Technical Overview
 
-## Architectural Pillars
-### The Multi-Runtime Core
-- **The Orchestrator (.NET/C#):** Handles high-level business rules, DDD (Domain-Driven Design) patterns, and complex state management.
-- **The Computational Engine (Rust):** A low-latency, memory-safe core responsible for the physics of time simulation and high-concurrency "step" execution.
-- **The Reactive Gateway (TypeScript):** Managing the real-time event stream and providing a type-safe interface for the distributed modules.
+The system architecture is built on three foundational pillars designed for high-stress testing:
 
-### Polyglot Persistence & Data Intelligence
-- **Relational (SQL):** Transactional integrity for order finalization and history.
-- **Document (NoSQL):** Flexible schema storage for dynamic recipe steps and chef profiles.
-- **Graph (Neo4j):** Mapping ingredient dependencies and supply chain bottlenecks.
-- **Time-Series/Warehouse:** Long-term storage of simulation metrics for performance auditing and "Heat Map" generation of kitchen efficiency.
+### 1. Multi-Runtime Core
+* **Orchestrator (.NET):** Manages Domain-Driven Design (DDD) patterns, business rules, and high-level state.
+* **Computational Engine (Rust):** A low-latency core responsible for the physics of time simulation and high-concurrency execution.
+* **Reactive Gateway (TypeScript):** Handles the real-time event stream and provides a type-safe interface for distributed modules.
 
-## Infrastructure as a Product
-The deployment strategy mirrors a global-scale enterprise application:
-- **Cloud Native (Azure):** Utilizing Service Bus for asynchronous messaging and Load Balancers for horizontal scaling of simulation nodes.
-- **Observability:** Integrated telemetry to track "Thread Health" and "Event Latency."
-- **DevOps:** Fully automated CI/CD pipelines with staged environments (Alpha, Beta, Prod) to practice zero-downtime deployments.
+### 2. Polyglot Persistence
+The data strategy utilizes specialized engines for specific domain problems:
+* **Relational (SQL):** Ensuring ACID compliance for financial and order finalization data.
+* **Document (NoSQL):** Storing dynamic, schema-less recipe steps and chef profiles.
+* **Graph (Neo4j):** Mapping complex ingredient dependencies and supply chain bottlenecks.
+* **Data Warehouse:** Aggregating historical metrics for performance auditing and bottleneck heat-mapping.
+
+### 3. Infrastructure & DevOps
+* **Azure Cloud:** Utilizing Service Bus for asynchronous messaging and Load Balancers for horizontal scaling.
+* **Observability:** Integrated telemetry for monitoring "Thread Health" and "Event Latency."
+* **CI/CD:** Fully automated pipelines supporting deployments across staged environments.
+
+## Project Stack
+* **Backend:** .NET 10 (C#), Rust
+* **Frontend/API:** TypeScript
+* **Messaging:** Azure Service Bus/RabbitMQ.
+* **Databases:** PostgreSQL, NoSQL (MongoDB/CosmosDB), Neo4j
+
+## Project Setup
+
+> *This section is currently under development. Detailed instructions for environment variables, Docker containers, and multi-runtime compilation will be added here.*
+
+1. **Prerequisites:** Ensure you have .NET 10 SDK, Rust (Cargo), and Node.js installed.
+2. **Clone the Repo:** `git clone https://github.com/m4ert/KitchenSimulator.git`
+3. **Local Infrastructure:** Run `docker-compose up` to spin up the SQL, NoSQL, and Graph instances.
