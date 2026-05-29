@@ -27,19 +27,18 @@ Subsequent phases will scale the platform beyond the kitchen walls to encompass 
 
 Potential vectors of exploration include front-of-house concurrency, high-throughput financial ledgers, and automated supply chain telemetry. Future phases will be explicitly mapped out as the underlying core infrastructure stabilizes.
 
-## Project Technical Overview
+## Project Technical Overview (Current Phase)
 
 The system architecture is built on three foundational pillars designed for high-stress testing:
 
-### 1. Multi-Runtime Core
+### 1. Unified .NET Core 
 
-* **Orchestrator (.NET 10):** Manages Domain-Driven Design (DDD) patterns, business rules, global state, and future enterprise modules.
-* **Computational Engine (Rust):** A ultra-low-latency core responsible for the physics of time simulation, high-concurrency execution, and performance-critical operations.
-* **Reactive Gateway (TypeScript):** Handles the real-time event stream and provides a type-safe interface for distributed modules.
+* **Domain & Orchestration (.NET 10):** Manages Domain-Driven Design (DDD) patterns, isolated aggregate roots, business rules, and the global simulation state.
+* **Concurrency Engine:** Utilizes advanced .NET threading, Channels, or Actor-like patterns to handle high-concurrency simulation physics and time passage.
 
 ### 2. Polyglot Persistence
 
-The data strategy utilizes specialized engines for specific domain problems across the restaurant ecosystem:
+The data strategy utilizes specialized engines tailored to specific domain problems within the simulator:
 
 * **Relational (PostgreSQL):** Ensuring ACID compliance for financial auditing, user roles, and order finalization data.
 * **Document (MongoDB/CosmosDB):** Storing dynamic, schema-less recipe steps, menu structures, and employee profiles.
@@ -48,16 +47,16 @@ The data strategy utilizes specialized engines for specific domain problems acro
 
 ### 3. Infrastructure & DevOps
 
-* **Azure Cloud:** Utilizing Service Bus for asynchronous messaging and Load Balancers for horizontal scaling.
-* **Observability:** Integrated telemetry for monitoring "Thread Health" and "Event Latency."
-* **CI/CD:** Fully automated pipelines supporting deployments across staged environments.
+* **Local Orchestration (.NET Aspire):** Used to provision, connect, and configure the multi-runtime apps and database containers locally.
+* **Messaging:** Utilizing optimized in-memory event buses (or local RabbitMQ containers) for asynchronous, decoupled event-driven communication within the system.
+* **Observability:** Integrated OpenTelemetry for monitoring simulation "Thread Health," "Channel Capacity," and "Event Latency."
 
 ## Project Stack
 
-* **Backend:** .NET 10 (C#), Rust
-* **Frontend/API:** TypeScript
-* **Messaging:** Azure Service Bus / RabbitMQ
-* **Databases:** PostgreSQL, MongoDB / CosmosDB, Neo4j
+* **Backend/Engine:** .NET 10 (C#)
+* **App Host / Orchestration:** .NET Aspire
+* **Messaging:** RabbitMQ / Azure Service Bus
+* **Databases:** PostgreSQL (+ TimescaleDB), MongoDB / CosmosDB, Neo4j
 
 ## Project Setup
 
