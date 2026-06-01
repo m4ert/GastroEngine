@@ -34,7 +34,7 @@ The system architecture is built on three foundational pillars designed for high
 ### 1. Unified .NET Core 
 
 * **Domain & Orchestration (.NET 10):** Manages Domain-Driven Design (DDD) patterns, isolated aggregate roots, business rules, and the global simulation state.
-* **Concurrency Engine:** Utilizes advanced .NET threading, Channels, or Actor-like patterns to handle high-concurrency simulation physics and time passage.
+* **Concurrency Engine:** Utilizes advanced .NET threading, Channels, or Actor-like patterns to handle high-concurrency simulation physics, time passage, and in-memory event dispatching.
 
 ### 2. Polyglot Persistence
 
@@ -48,14 +48,13 @@ The data strategy utilizes specialized engines tailored to specific domain probl
 ### 3. Infrastructure & DevOps
 
 * **Local Orchestration (.NET Aspire):** Used to provision, connect, and configure the multi-runtime apps and database containers locally.
-* **Messaging:** Utilizing optimized in-memory event buses (or local RabbitMQ containers) for asynchronous, decoupled event-driven communication within the system.
+* **In-Memory Event Bus:** Utilizing optimized native .NET Channels for asynchronous, decoupled event-driven communication entirely within the application process boundary.
 * **Observability:** Integrated OpenTelemetry for monitoring simulation "Thread Health," "Channel Capacity," and "Event Latency."
 
 ## Project Stack
 
 * **Backend/Engine:** .NET 10 (C#)
 * **App Host / Orchestration:** .NET Aspire
-* **Messaging:** RabbitMQ / Azure Service Bus
 * **Databases:** PostgreSQL (+ TimescaleDB), MongoDB / CosmosDB, Neo4j
 
 ## Project Setup
@@ -63,5 +62,5 @@ The data strategy utilizes specialized engines tailored to specific domain probl
 > ⚠️ *This section is currently under development. Detailed instructions for environment variables, Docker containers, and multi-runtime compilation will be added here.*
 
 1. **Prerequisites:** Ensure you have the .NET 10 SDK, Rust (Cargo), and Node.js installed.
-2. **Clone the Repo:** `git clone [https://github.com/m4ert/.git](https://github.com/m4ert/GastroEngine.git)`
+2. **Clone the Repo:** `git clone https://github.com/m4ert/GastroEngine.git`
 3. **Local Infrastructure:** Run Aspire to spin up the SQL, NoSQL, and Graph instances.
