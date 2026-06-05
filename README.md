@@ -45,11 +45,11 @@ The data strategy utilizes specialized engines tailored to specific domain probl
 * **Graph (Neo4j):** Mapping complex ingredient dependencies, recipe composition, and supply chain bottlenecks.
 * **Data Warehouse:** Aggregating historical metrics for deep operational performance analysis.
 
-### 3. Infrastructure & DevOps
+### 3. Local Orchestration & Diagnostics
 
-* **Local Orchestration (.NET Aspire):** Used to provision, connect, and configure the multi-runtime apps and database containers locally.
-* **In-Memory Event Bus:** Utilizing optimized native .NET Channels for asynchronous, decoupled event-driven communication entirely within the application process boundary.
-* **Observability:** Integrated OpenTelemetry for monitoring simulation "Thread Health," "Channel Capacity," and "Event Latency."
+* **.NET Aspire AppHost:** Acts as the local infrastructure control plane, provisioning and connecting our multi-database topology (PostgreSQL, MongoDB, Neo4j) seamlessly via code-first configuration.
+* **In-Memory Event Bus:** Utilizes optimized native .NET Channels for high-throughput, asynchronous, and decoupled event-driven communication entirely within the application process boundary.
+* **Advanced Telemetry Dashboard:** Leverages Aspire's built-in OpenTelemetry engine to monitor simulation metrics in real time—specifically tracking channel saturation, thread performance, and event dispatch latencies.
 
 ## Project Stack
 
