@@ -12,13 +12,13 @@ The core mission is to master "The Edge"—the threshold where standard software
 
 To achieve the ultimate vision of a fully integrated restaurant operations platform, development is divided into strategic, isolated phases.
 
-### Current Focus — Phase 1: The Kitchen Simulator
+### Current Focus — Phase 1: The Kitchen Simulator (Pure Domain Implementation)
 
-The initial phase focuses exclusively on the automation and high-fidelity modeling of complex kitchen processes, specifically the transition from order placement to completion under real-world constraints:
+The initial phase focuses exclusively on the automation and high-fidelity modeling of complex kitchen processes, specifically the transition from order placement to completion under real-world constraints. **At this stage, the entire focus is on core domain logic, business rules, and behavior abstractions, completely isolated from infrastructure concerns.**
 
-* **Asynchronous Orchestration:** Simulating real-world time passage (e.g., bread toasting) using non-blocking, concurrent execution threads.
-* **State Integrity:** Implementing a strict state machine (*Order -> Ingredient Check -> In Progress -> Completed*) with full event-sourced traceability.
-* **Dynamic Algorithmic Estimation:** Calculating preparation times through a multi-variable formula executed at the core level.
+* **Asynchronous Orchestration:** Simulating real-world time passage (e.g., baking or cooking times) using non-blocking, concurrent execution abstractions.
+* **State Integrity:** Implementing a strict state machine (*Order -> Ingredient Check -> In Progress -> Completed*) with full event-sourced traceability designed into the domain core.
+* **Dynamic Algorithmic Estimation:** Calculating preparation times through a multi-variable formula executed at the core aggregate level.
 * **Inventory Simulation:** Validating live stock availability with automated fallback states (e.g., "In Search of Ingredients") to test system resilience under stress.
 
 ### Future Horizons — Full Restaurant Operations
@@ -29,38 +29,35 @@ Potential vectors of exploration include front-of-house concurrency, high-throug
 
 ## Project Technical Overview (Current Phase)
 
-The system architecture is built on three foundational pillars designed for high-stress testing:
+The system architecture is strictly decoupled, following **Clean Architecture** and **Domain-Driven Design (DDD)** principles to keep the core business logic independent of external frameworks, databases, or UI components.
 
-### 1. Unified .NET Core 
+### 1. Unified .NET Core Core Domain
 
-* **Domain & Orchestration (.NET 10):** Manages Domain-Driven Design (DDD) patterns, isolated aggregate roots, business rules, and the global simulation state.
-* **Concurrency Engine:** Utilizes advanced .NET threading, Channels, or Actor-like patterns to handle high-concurrency simulation physics, time passage, and in-memory event dispatching.
+* **Domain & Orchestration (.NET 10):** Manages Domain-Driven Design (DDD) patterns, isolated aggregate roots, entities, value objects, and domain events that dictate the global simulation behavior.
+* **In-Memory Concurrency:** Utilizes advanced .NET threading and high-performance memory structures to handle concurrency simulation physics, time passage, and internal event propagation without relying on external message brokers.
 
-### 2. Polyglot Persistence
+### 2. Multi-Paradigm Abstraction Layer
 
-The data strategy utilizes specialized engines tailored to specific domain problems within the simulator:
+The data strategy utilizes clean interface abstractions tailored to specific domain problems within the simulator, preparing the ground for multi-paradigm persistence without committing to concrete engines yet:
 
-* **Relational (PostgreSQL):** Ensuring ACID compliance for financial auditing, user roles, and order finalization data.
-* **Document (MongoDB/CosmosDB):** Storing dynamic, schema-less recipe steps, menu structures, and employee profiles.
-* **Graph (Neo4j):** Mapping complex ingredient dependencies, recipe composition, and supply chain bottlenecks.
-* **Data Warehouse:** Aggregating historical metrics for deep operational performance analysis.
+* **Relational Storage Interfaces:** Defining contracts for strict transactional integrity, financial auditing, user roles, and order finalization data.
+* **Document/Key-Value Storage Interfaces:** Defining contracts for handling dynamic, hierarchical data like schema-less recipe steps, menu structures, and employee profiles.
+* **Graph/Network Topology Interfaces:** Modeling complex ingredient dependencies, recipe composition, and supply chain bottlenecks through specialized domain relationship maps.
 
-### 3. Local Orchestration & Diagnostics
+### 3. Decoupled Diagnostics & Boundaries
 
-* **.NET Aspire AppHost:** Acts as the local infrastructure control plane, provisioning and connecting our multi-database topology (PostgreSQL, MongoDB, Neo4j) seamlessly via code-first configuration.
-* **In-Memory Event Bus:** Utilizes optimized native .NET Channels for high-throughput, asynchronous, and decoupled event-driven communication entirely within the application process boundary.
-* **Advanced Telemetry Dashboard:** Leverages Aspire's built-in OpenTelemetry engine to monitor simulation metrics in real time—specifically tracking channel saturation, thread performance, and event dispatch latencies.
+* **Agnostic Domain Events:** Leverages internal abstractions for high-throughput, asynchronous, and decoupled event-driven communication entirely within the application process boundary.
+* **Telemetry Interfaces:** Built-in hooks for deep observability, preparing the core to emit critical metrics like execution latency, channel saturation, and state transition performance once hooked into a concrete diagnostics engine.
 
 ## Project Stack
 
-* **Backend/Engine:** .NET 10 (C#)
-* **App Host / Orchestration:** .NET Aspire
-* **Databases:** PostgreSQL (+ TimescaleDB), MongoDB / CosmosDB, Neo4j
+* **Core Engine:** .NET 10 (C#)
+* **Architectural Patterns:** Domain-Driven Design (DDD), Clean Architecture, Event Sourcing (Domain Level), CQRS Abstractions.
 
 ## Project Setup
 
-> ⚠️ *This section is currently under development. Detailed instructions for environment variables, Docker containers, and multi-runtime compilation will be added here.*
+> ⚠️ *This section is currently under development. Detailed instructions for infrastructure provisioning, containerization, and multi-runtime compilation will be added as physical implementation layers are introduced.*
 
-1. **Prerequisites:** Ensure you have the .NET 10 SDK, Rust (Cargo), and Node.js installed.
+1. **Prerequisites:** Ensure you have the .NET 10 SDK installed.
 2. **Clone the Repo:** `git clone https://github.com/m4ert/GastroEngine.git`
-3. **Local Infrastructure:** Run Aspire to spin up the SQL, NoSQL, and Graph instances.
+3. **Build the Domain:** Run `dotnet build` from the solution root to compile the core abstractions and domain logic.
