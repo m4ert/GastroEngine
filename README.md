@@ -10,8 +10,6 @@ The core mission is to master "The Edge"—the threshold where standard software
 
 ## Project Scope
 
-To achieve the ultimate vision of a fully integrated restaurant operations platform, development is divided into strategic, isolated phases.
-
 ### Current Focus — Phase 1: The Kitchen Simulator (Pure Domain Implementation)
 
 The initial phase focuses exclusively on the automation and high-fidelity modeling of complex kitchen processes, specifically the transition from order placement to completion under real-world constraints. **At this stage, the entire focus is on core domain logic, business rules, and behavior abstractions, completely isolated from infrastructure concerns.**
@@ -44,10 +42,9 @@ The data strategy utilizes clean interface abstractions tailored to specific dom
 * **Document/Key-Value Storage Interfaces:** Defining contracts for handling dynamic, hierarchical data like schema-less recipe steps, menu structures, and employee profiles.
 * **Graph/Network Topology Interfaces:** Modeling complex ingredient dependencies, recipe composition, and supply chain bottlenecks through specialized domain relationship maps.
 
-### 3. Decoupled Diagnostics & Boundaries
+### 3. Decoupled Event Communication
 
 * **Agnostic Domain Events:** Leverages internal abstractions for high-throughput, asynchronous, and decoupled event-driven communication entirely within the application process boundary.
-* **Telemetry Interfaces:** Built-in hooks for deep observability, preparing the core to emit critical metrics like execution latency, channel saturation, and state transition performance once hooked into a concrete diagnostics engine.
 
 ## Project Stack
 
