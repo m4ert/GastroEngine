@@ -1,6 +1,6 @@
 namespace GastroEngine.Domain.Enums;
 
-public enum UnitOfMeasure
+public enum MeasureUnit
 {
     None,
     
